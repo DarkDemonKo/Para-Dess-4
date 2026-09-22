@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para ti 🌻</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background: linear-gradient(135deg, #fffaf0 0%, #fff0c2 100%); 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            overflow: hidden; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+            text-align: center; 
+            color: #5a4a42; 
+        }
+        #message-container { 
+            z-index: 10; 
+            padding: 30px 20px; 
+            background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(10px);
+            border-radius: 20px; 
+            box-shadow: 0 8px 32px rgba(230, 179, 0, 0.2); 
+            width: 85%; 
+            max-width: 380px; 
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        h1 { color: #d49a00; font-size: 26px; margin-top: 0; margin-bottom: 15px; }
+        p { font-size: 17px; line-height: 1.6; margin-bottom: 25px; }
+        .btn { 
+            padding: 14px 28px; 
+            background-color: #ffcc00; 
+            color: #6b4c00; 
+            border: none; 
+            border-radius: 30px; 
+            font-size: 18px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4); 
+            transition: transform 0.2s, background-color 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .btn:active { transform: scale(0.95); background-color: #e6b800; }
+        .flower { 
+            position: absolute; 
+            bottom: -50px; 
+            user-select: none;
+            pointer-events: none;
+            animation: floatUp 4s ease-in-out forwards; 
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div id="message-container">
+        <h1>Flores que no se marchitan 🌻</h1>
+        <p>Sé que ayer te di flores en persona, pero quería dejarte unas virtuales para que las lleves en tu celular siempre que las necesites.</p>
+        <button class="btn" onclick="spawnFlowers()">Toca aquí 💛</button>
+    </div>
+
+    <script>
+        function spawnFlowers() {
+            const elements = ['🌻', '🌼', '💛', '✨'];
+            // Genera 20 flores/corazones en intervalos cortos
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const el = document.createElement('div');
+                    el.className = 'flower';
+                    el.innerText = elements[Math.floor(Math.random() * elements.length)];
+                    
+                    // Posición horizontal aleatoria
+                    el.style.left = Math.random() * 90 + 'vw';
+                    
+                    // Tamaño aleatorio
+                    el.style.fontSize = (Math.random() * 2 + 1.5) + 'rem';
+                    
+                    // Duración de la animación aleatoria para que no suban todas igual
+                    el.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    
+                    document.body.appendChild(el);
+                    
+                    // Limpia el DOM después de que termine la animación
+                    setTimeout(() => el.remove(), 5000);
+                }, i * 150); // Retraso escalonado entre cada flor
+            }
+        }
+    </script>
+</body>
+</html>
